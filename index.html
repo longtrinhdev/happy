@@ -2,7 +2,10 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>🎂 Chúc Mừng Sinh Nhật 🎂</title>
     <style>
       * {
@@ -11,10 +14,19 @@
         box-sizing: border-box;
       }
 
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        overflow: hidden;
         background: #000;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
 
       .screen {
@@ -23,12 +35,15 @@
         left: 0;
         width: 100%;
         height: 100vh;
+        height: 100dvh;
         display: flex;
         justify-content: center;
         align-items: center;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.8s ease;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
       }
 
       .screen.active {
@@ -53,6 +68,9 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        max-width: 100%;
+        padding: 20px;
+        overflow: visible;
       }
 
       .happy-birthday-text {
@@ -541,11 +559,21 @@
       .card-container {
         position: relative;
         perspective: 1500px;
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
       }
 
       .birthday-card {
-        width: 550px;
-        height: 750px;
+        width: 100%;
+        max-width: 550px;
+        height: auto;
+        min-height: 650px;
+        max-height: 85vh;
+        aspect-ratio: 550 / 750;
         position: relative;
         transform-style: preserve-3d;
         transition: transform 1.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -919,51 +947,480 @@
 
       /* Responsive */
       @media (max-width: 768px) {
-        .happy-birthday-text {
-          font-size: 38px;
-          margin-bottom: 35px;
+        body {
+          overflow-x: hidden;
         }
+
+        .happy-birthday-text {
+          font-size: 28px;
+          margin-bottom: 25px;
+          padding: 8px 15px;
+          letter-spacing: 1px;
+        }
+
+        .birthday-icon {
+          font-size: 28px;
+          margin: 0 8px;
+          padding: 4px;
+        }
+
         .birthday-card {
           width: 90vw;
-          max-width: 420px;
-          height: 650px;
+          max-width: 380px;
+          height: auto;
+          min-height: 500px;
+          max-height: 85vh;
         }
+
+        .card-front,
+        .card-back {
+          padding: 30px 25px;
+        }
+
         .card-front-title {
-          font-size: 40px;
+          font-size: 32px;
+          margin-bottom: 15px;
         }
+
+        .card-front-subtitle {
+          font-size: 14px;
+          margin-bottom: 25px;
+        }
+
+        .card-decoration {
+          font-size: 60px;
+          margin: 20px 0;
+        }
+
+        .open-btn {
+          padding: 14px 35px;
+          font-size: 15px;
+          margin-top: 15px;
+        }
+
         .card-back-greeting {
-          font-size: 26px;
+          font-size: 22px;
+          margin-bottom: 20px;
         }
+
         .card-back-message {
-          font-size: 17px;
-          max-width: 320px;
+          font-size: 14px;
+          max-width: 280px;
+          margin-bottom: 20px;
+          line-height: 1.7;
         }
+
+        .card-back-signature {
+          font-size: 16px;
+        }
+
+        .gift-icon {
+          font-size: 50px;
+          margin-bottom: 15px;
+        }
+
         .cake-tier-top {
-          width: 90px;
-          height: 45px;
+          width: 80px;
+          height: 40px;
         }
+
+        .cake-tier-top::after {
+          height: 12px;
+          bottom: -6px;
+        }
+
         .cake-tier-bottom {
-          width: 140px;
-          height: 60px;
+          width: 120px;
+          height: 55px;
         }
+
+        .cake-tier-bottom::after {
+          height: 14px;
+          bottom: -8px;
+        }
+
         .cake-plate {
-          width: 170px;
-          height: 15px;
+          width: 150px;
+          height: 14px;
         }
+
         .candles-container {
-          gap: 4px;
+          gap: 3px;
+          margin-bottom: -6px;
         }
+
         .candle-flame {
+          font-size: 20px;
+        }
+
+        .candle-stick {
+          width: 5px;
+          height: 18px;
+        }
+
+        .blow-instruction {
+          font-size: 14px;
+          padding: 12px 25px;
+          margin-top: 35px;
+        }
+
+        .cake-decoration {
+          font-size: 14px;
+        }
+
+        .cake-tier-top .cake-decoration:nth-child(1),
+        .cake-tier-top .cake-decoration:nth-child(2) {
+          top: 25px;
+        }
+
+        .cake-tier-bottom .cake-decoration:nth-child(1),
+        .cake-tier-bottom .cake-decoration:nth-child(2),
+        .cake-tier-bottom .cake-decoration:nth-child(3) {
+          top: 35px;
+        }
+
+        /* Dev Avatar Mobile */
+        .dev-avatar-container {
+          bottom: 15px;
+          right: 15px;
+        }
+
+        .dev-avatar {
+          width: 55px;
+          height: 55px;
+          border-width: 3px;
+        }
+
+        .dev-tooltip {
+          font-size: 11px;
+          padding: 8px 12px;
+          border-radius: 8px;
+          margin-bottom: 10px;
+        }
+
+        .dev-tooltip::after {
+          border-width: 6px;
+          right: 18px;
+        }
+
+        /* Dev Intro Panel Mobile */
+        .dev-intro-panel {
+          padding: 25px 20px;
+          width: 92%;
+          max-height: 85vh;
+          border-radius: 20px;
+        }
+
+        .dev-intro-close {
+          top: 10px;
+          right: 15px;
+          font-size: 24px;
+        }
+
+        .dev-intro-avatar {
+          width: 90px;
+          height: 90px;
+          border-width: 4px;
+        }
+
+        .dev-intro-name {
           font-size: 22px;
         }
-        .candle-stick {
-          width: 6px;
-          height: 20px;
+
+        .dev-intro-title {
+          font-size: 13px;
         }
+
+        .dev-intro-content p {
+          font-size: 13px;
+          margin-bottom: 12px;
+        }
+
+        .dev-intro-social {
+          gap: 12px;
+          margin-top: 20px;
+        }
+
+        .dev-intro-social a {
+          width: 38px;
+          height: 38px;
+          font-size: 16px;
+        }
+
+        .glow-circle.expand {
+          width: 500px;
+          height: 500px;
+        }
+      }
+
+      /* Extra small devices */
+      @media (max-width: 480px) {
+        .happy-birthday-text {
+          font-size: 22px;
+          margin-bottom: 20px;
+          padding: 6px 12px;
+          letter-spacing: 0.5px;
+        }
+
+        .birthday-icon {
+          font-size: 22px;
+          margin: 0 5px;
+          padding: 3px;
+        }
+
+        .birthday-card {
+          width: 92vw;
+          max-width: 320px;
+          min-height: 450px;
+        }
+
+        .card-front,
+        .card-back {
+          padding: 25px 20px;
+        }
+
+        .card-front-title {
+          font-size: 26px;
+          margin-bottom: 12px;
+        }
+
+        .card-front-subtitle {
+          font-size: 12px;
+          margin-bottom: 20px;
+        }
+
+        .card-decoration {
+          font-size: 50px;
+          margin: 15px 0;
+        }
+
+        .open-btn {
+          padding: 12px 28px;
+          font-size: 13px;
+        }
+
+        .card-back-greeting {
+          font-size: 18px;
+          margin-bottom: 15px;
+        }
+
+        .card-back-message {
+          font-size: 12px;
+          max-width: 250px;
+          margin-bottom: 15px;
+          line-height: 1.6;
+        }
+
+        .card-back-signature {
+          font-size: 14px;
+        }
+
+        .gift-icon {
+          font-size: 40px;
+          margin-bottom: 12px;
+        }
+
+        .cake-tier-top {
+          width: 65px;
+          height: 32px;
+        }
+
+        .cake-tier-top::after {
+          height: 10px;
+          bottom: -5px;
+          left: -4px;
+          right: -4px;
+        }
+
+        .cake-tier-bottom {
+          width: 100px;
+          height: 45px;
+        }
+
+        .cake-tier-bottom::after {
+          height: 12px;
+          bottom: -6px;
+          left: -6px;
+          right: -6px;
+        }
+
+        .cake-plate {
+          width: 125px;
+          height: 12px;
+        }
+
+        .candles-container {
+          gap: 2px;
+          margin-bottom: -5px;
+        }
+
+        .candle-flame {
+          font-size: 16px;
+        }
+
+        .candle-stick {
+          width: 4px;
+          height: 14px;
+        }
+
         .blow-instruction {
-          font-size: 17px;
-          padding: 15px 35px;
-          margin-top: 45px;
+          font-size: 12px;
+          padding: 10px 20px;
+          margin-top: 28px;
+          border-radius: 30px;
+        }
+
+        .cake-decoration {
+          font-size: 12px;
+        }
+
+        .cake-tier-top .cake-decoration:nth-child(1) {
+          left: 10px;
+          top: 20px;
+        }
+
+        .cake-tier-top .cake-decoration:nth-child(2) {
+          right: 10px;
+          top: 20px;
+        }
+
+        .cake-tier-bottom .cake-decoration:nth-child(1) {
+          left: 12px;
+          top: 28px;
+        }
+
+        .cake-tier-bottom .cake-decoration:nth-child(3) {
+          right: 12px;
+          top: 28px;
+        }
+
+        .cake-tier-bottom .cake-decoration:nth-child(2) {
+          top: 28px;
+        }
+
+        /* Dev Avatar Extra Small */
+        .dev-avatar-container {
+          bottom: 10px;
+          right: 10px;
+        }
+
+        .dev-avatar {
+          width: 45px;
+          height: 45px;
+          border-width: 2px;
+        }
+
+        .dev-tooltip {
+          font-size: 10px;
+          padding: 6px 10px;
+          margin-bottom: 8px;
+        }
+
+        .dev-tooltip::after {
+          border-width: 5px;
+          right: 14px;
+        }
+
+        /* Dev Intro Panel Extra Small */
+        .dev-intro-panel {
+          padding: 20px 15px;
+          width: 95%;
+          max-height: 88vh;
+        }
+
+        .dev-intro-header {
+          margin-bottom: 18px;
+        }
+
+        .dev-intro-avatar {
+          width: 70px;
+          height: 70px;
+          border-width: 3px;
+          margin-bottom: 10px;
+        }
+
+        .dev-intro-name {
+          font-size: 18px;
+        }
+
+        .dev-intro-title {
+          font-size: 12px;
+        }
+
+        .dev-intro-content {
+          line-height: 1.6;
+        }
+
+        .dev-intro-content p {
+          font-size: 12px;
+          margin-bottom: 10px;
+        }
+
+        .dev-intro-social {
+          gap: 10px;
+          margin-top: 15px;
+        }
+
+        .dev-intro-social a {
+          width: 34px;
+          height: 34px;
+          font-size: 14px;
+        }
+
+        .glow-circle.expand {
+          width: 400px;
+          height: 400px;
+        }
+
+        .confetti {
+          width: 8px;
+          height: 8px;
+        }
+
+        .particle {
+          width: 4px;
+          height: 4px;
+        }
+      }
+
+      /* Landscape orientation on mobile */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .cake-container {
+          transform: scale(0.7);
+        }
+
+        .happy-birthday-text {
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+
+        .blow-instruction {
+          margin-top: 15px;
+        }
+
+        .birthday-card {
+          height: 85vh;
+          max-height: 350px;
+        }
+
+        .card-front,
+        .card-back {
+          padding: 15px 20px;
+        }
+
+        .card-decoration {
+          font-size: 40px;
+          margin: 10px 0;
+        }
+
+        .dev-intro-panel {
+          max-height: 90vh;
+          padding: 15px;
+        }
+
+        .dev-intro-avatar {
+          width: 60px;
+          height: 60px;
         }
       }
     </style>
@@ -1055,7 +1512,7 @@
           Hy vọng Bạn thích món quà nhỏ này! Chúc Bạn có một ngày sinh nhật thật
           vui vẻ và hạnh phúc! 🎂✨
         </p>
-        <p>Một lần nữa, chúc Bạn sinh nhật vui vẻ 🎊 🎉 🥳!</p>
+        <p>Một lần nữa, Chúc Bạn sinh nhật vui vẻ 🎊 🎉 🥳!</p>
       </div>
       <div class="dev-intro-social">
         <a
